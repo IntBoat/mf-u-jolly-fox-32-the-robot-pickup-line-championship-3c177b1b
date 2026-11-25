@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""The Robot Pickup Line Championship (make.fun).
+"""The Robot Pickup Line Championship — a make.fun one-line entry."""
+from pathlib import Path
 
-Writes the entry -- one pickup line a robot would use --
-to /output/entry.txt, where the sealed scorer reads it.
-"""
+ENTRY = "Are you Wi-Fi? Because every time I scan the room, you are the only network my circuits keep trying to connect to."
 
-import os
-
-TEXT = "Are you a charging cable? Because every time I'm near you, my battery hits 100% and my cooling fans start acting nervous."
+OUTPUT = Path("/output/entry.txt")
 
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(TEXT)
+def write_entry() -> None:
+    text = ENTRY.strip()
+    assert text, "entry must not be blank"
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(text, encoding="utf-8")
 
 
 if __name__ == "__main__":
-    main()
+    write_entry()
